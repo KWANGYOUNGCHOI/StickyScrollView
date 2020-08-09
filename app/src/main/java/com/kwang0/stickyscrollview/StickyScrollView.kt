@@ -4,16 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.ScrollView
 import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 
-class StickyScrollView : ScrollView, ViewTreeObserver.OnGlobalLayoutListener {
+class StickyScrollView : NestedScrollView, ViewTreeObserver.OnGlobalLayoutListener {
 
-    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context) : this(context, null, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
