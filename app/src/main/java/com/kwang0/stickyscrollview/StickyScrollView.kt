@@ -4,15 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.ScrollView
+import androidx.core.view.ViewCompat
+import androidx.core.widget.NestedScrollView
 
-class StickyScrollView : ScrollView, ViewTreeObserver.OnGlobalLayoutListener {
+class StickyScrollView : NestedScrollView, ViewTreeObserver.OnGlobalLayoutListener {
 
-    constructor(context: Context?) : this(context, null, 0)
+    constructor(context: Context) : this(context, null, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?) : this(context, attrs, 0)
+    constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
@@ -25,8 +26,7 @@ class StickyScrollView : ScrollView, ViewTreeObserver.OnGlobalLayoutListener {
         set(value) {
             field = value
             field?.let {
-                it.bringToFront()
-//                it.translationZ = 1f
+                ViewCompat.setTranslationZ(it, 1f)
                 it.setOnClickListener { _ ->
                     //클릭 시, 헤더뷰가 최상단으로 오게 스크롤 이동
                     this.smoothScrollTo(scrollX, it.top)

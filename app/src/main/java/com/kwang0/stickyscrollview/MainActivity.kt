@@ -3,6 +3,7 @@ package com.kwang0.stickyscrollview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,12 +13,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        sticky_scroll_view.run {
-            header = header_view
-            stickListener = { _ ->
+        val adapter = DummyRecyclerAdapter(arrayListOf("1", "2", "3", "4", "5", "6", "7"))
+        recycler_view.apply {
+            this.adapter = adapter
+            this.isNestedScrollingEnabled = false
+        }
+
+        sticky_scroll_view.also {
+            it.header = header_view
+            it.stickListener = { _ ->
                 Log.d(TAG, "stickListener")
             }
-            freeListener = { _ ->
+            it.freeListener = { _ ->
                 Log.d(TAG, "freeListener")
             }
         }
