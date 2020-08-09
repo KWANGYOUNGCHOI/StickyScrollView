@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ScrollView
+import androidx.core.view.ViewCompat
 
 class StickyScrollView : ScrollView, ViewTreeObserver.OnGlobalLayoutListener {
 
@@ -25,8 +26,7 @@ class StickyScrollView : ScrollView, ViewTreeObserver.OnGlobalLayoutListener {
         set(value) {
             field = value
             field?.let {
-                it.bringToFront()
-//                it.translationZ = 1f
+                ViewCompat.setTranslationZ(it, 1f)
                 it.setOnClickListener { _ ->
                     //클릭 시, 헤더뷰가 최상단으로 오게 스크롤 이동
                     this.smoothScrollTo(scrollX, it.top)
